@@ -1,0 +1,64 @@
+//This program uses bluetooth module for functioning
+
+#include<SoftwareSerial.h>
+int lm1 =10; //left motor1
+int lm2=9; //left motor2
+int rm1=8; //right motor1
+int rm2=7; //right motor2
+SoftwareSerial mySerial(6,5);
+void setup() 
+{
+
+pinMode(lm1,OUTPUT);
+pinMode(lm2,OUTPUT);
+pinMode(rm1,OUTPUT);
+pinMode(rm2,OUTPUT);
+Serial.begin(9600);
+mySerial.begin(9600);
+}
+
+void loop() 
+{
+while(mySerial.available()>=0)
+  {
+    char ch = mySerial.read();
+  
+Serial.println(ch);
+if(ch=='F') //forward
+{
+  digitalWrite(lm1,HIGH);
+  digitalWrite(lm2,LOW);
+  digitalWrite(rm1,HIGH);
+  digitalWrite(rm2,LOW);
+  
+}
+else if(ch=='B') //backward
+{
+  digitalWrite(lm1,LOW);
+  digitalWrite(lm2,HIGH);
+  digitalWrite(rm1,LOW);
+  digitalWrite(rm2,HIGH);
+}
+else if(ch=='L') // Left
+{
+  digitalWrite(lm1,LOW);
+  digitalWrite(lm2,HIGH);
+  digitalWrite(rm1,HIGH);
+  digitalWrite(rm2,LOW);
+}
+else if (ch=='R') // right
+{
+  digitalWrite(lm1,HIGH);
+  digitalWrite(lm2,LOW);
+  digitalWrite(rm1,LOW);
+  digitalWrite(rm2,HIGH);
+}
+else if(ch=='S')
+{
+  digitalWrite(lm1,LOW);
+  digitalWrite(lm2,LOW);
+  digitalWrite(rm1,LOW);
+  digitalWrite(rm2,LOW);
+}
+}
+}
